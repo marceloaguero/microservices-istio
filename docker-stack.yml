@@ -7,6 +7,12 @@ services:
   #     - golang-demo
   #   ports:
   #     - 80:80
+  service-rev-proxy:
+    image: marceloaguero/microservices-istio-service-rev-proxy
+    ports:
+      - 8000:80
+    networks:
+      - golang-demo
   service-a:
     image: marceloaguero/microservices-istio-service-a
     networks:
