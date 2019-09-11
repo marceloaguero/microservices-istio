@@ -7,12 +7,10 @@ services:
   #     - golang-demo
   #   ports:
   #     - 80:80
-  # service-a:
-  #   image: marceloaguero/microservices-istio-service-a
-  #   networks:
-  #     - golang-demo
-  #   ports:
-  #     - 8000:80
+  service-a:
+    image: marceloaguero/microservices-istio-service-a
+    networks:
+      - golang-demo
   service-b:
     image: marceloaguero/microservices-istio-service-b
     networks:
