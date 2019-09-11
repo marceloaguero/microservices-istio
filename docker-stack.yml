@@ -1,0 +1,38 @@
+version: '3.7'
+
+services:
+  # angular-ui:
+  #   image: marceloaguero/microservices-istio-frontend
+  #   networks:
+  #     - golang-demo
+  #   ports:
+  #     - 80:80
+  # service-a:
+  #   image: marceloaguero/microservices-istio-service-a
+  #   networks:
+  #     - golang-demo
+  #   ports:
+  #     - 8000:80
+  service-b:
+    image: marceloaguero/microservices-istio-service-b
+    networks:
+      - golang-demo
+  service-c:
+    image: marceloaguero/microservices-istio-service-c
+    networks:
+      - golang-demo
+    environment:
+      MONGO_CONN: 'mongodb://mongodb:27017/admin'
+  mongodb:
+    image: mongo:latest
+    networks:
+      - golang-demo
+    ports:
+      - 27017:27017
+
+networks:
+  golang-demo:
+    external: true
+
+volumes:
+  data: {}
