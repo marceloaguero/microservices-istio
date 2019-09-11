@@ -35,16 +35,18 @@ func (s *greetingServiceServer) Greeting(ctx context.Context, req *pb.GreetingRe
 
 	greetings = append(greetings, &tmpGreeting)
 
-	CallMongoDB(tmpGreeting)
+	callMongoDB(tmpGreeting)
 
 	return &pb.GreetingResponse{
 		Greeting: greetings,
 	}, nil
 }
 
-func CallMongoDB(greeting pb.Greeting) {
+func callMongoDB(greeting pb.Greeting) {
 	log.Info(greeting)
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
 	client, err := mongo.Connect(ctx, options.Client().ApplyURI(os.Getenv("MONGO_CONN")))
 	if err != nil {
 		log.Error(err)
@@ -53,7 +55,8 @@ func CallMongoDB(greeting pb.Greeting) {
 	defer client.Disconnect(nil)
 
 	collection := client.Database("service-g").Collection("greetings")
-	ctx, _ = context.WithTimeout(context.Background(), 5*time.Second)
+	ctx, cancel = context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
 
 	_, err = collection.InsertOne(ctx, greeting)
 	if err != nil {
