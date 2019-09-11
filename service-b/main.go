@@ -27,7 +27,7 @@ func (s *greetingServiceServer) Greeting(ctx context.Context, req *pb.GreetingRe
 	tmpGreeting := pb.Greeting{
 		Id:      uuid.New().String(),
 		Service: "Service-B",
-		Message: "Konnichiwa, from Service-B!",
+		Message: "Namaste, from Service-B!",
 		Created: time.Now().Local().String(),
 	}
 
