@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	runtime "github.com/banzaicloud/logrus-runtime-formatter"
+	lrf "github.com/banzaicloud/logrus-runtime-formatter"
 	"github.com/google/uuid"
 	grpc_opentracing "github.com/grpc-ecosystem/go-grpc-middleware/tracing/opentracing"
 	ot "github.com/opentracing/opentracing-go"
@@ -101,7 +101,7 @@ func getEnv(key, fallback string) string {
 }
 
 func init() {
-	formatter := runtime.Formatter{ChildFormatter: &log.JSONFormatter{}}
+	formatter := lrf.Formatter{ChildFormatter: &log.JSONFormatter{}}
 	formatter.Line = true
 	log.SetFormatter(&formatter)
 	log.SetOutput(os.Stdout)
