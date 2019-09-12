@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <label for="apiUrl">API URL:</label>&nbsp;
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">http://</span>
+      </div>
+      <input [(ngModel)]="apiURL" class="form-control" id="apiUrl" type="text" value={{apiURL}}/>&nbsp;&nbsp;
+      <button (click)="changeApiUrl()" class="btn btn-primary">Submit</button>
+    </div>
+    <small><i>{{apiURLFull}}</i></small>
+  </div>
+  <br/>
+  <div class="row">
+    <h4>API Response</h4>
+  </div>
+  <div class="row">
+    <div *ngIf="greetings" id="greetings">
+      <ul class="card-columns">
+        <li *ngFor="let greeting of greetings.greeting" class="list-group-item">
+          <h5>{{greeting.service}}</h5>
+          <i>{{greeting.message}}</i><br/>
+          <small class="text-muted">{{greeting.id}}</small>
+          <br/>
+          <small class="text-muted">{{greeting.created}}</small>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div *ngIf="timingMessage" id="timing">
+      {{timingMessage}}
+    </div>
+  </div>
+</div>
