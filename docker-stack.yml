@@ -1,12 +1,12 @@
 version: '3.7'
 
 services:
-  # frontend:
-  #   image: marceloaguero/microservices-istio-frontend
-  #   networks:
-  #     - golang-demo
-  #   ports:
-  #     - 80:80
+  frontend:
+    image: marceloaguero/microservices-istio-frontend
+    ports:
+      - 80:80
+    networks:
+      - golang-demo
   service-rev-proxy:
     image: marceloaguero/microservices-istio-service-rev-proxy
     ports:
